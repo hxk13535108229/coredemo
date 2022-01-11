@@ -2,7 +2,6 @@ package demo
 
 import (
 	demoService "github.com/gohade/hade/app/provider/demo"
-	"github.com/gohade/hade/framework/contract"
 	"github.com/gohade/hade/framework/gin"
 )
 
@@ -28,10 +27,9 @@ func NewDemoApi() *DemoApi {
 }
 
 func (api *DemoApi) Demo(c *gin.Context) {
-	appService:=c.MustMake(contract.AppKey).(contract.App)
-	baseFolder:=appService.BaseFolder()
-
-	c.JSON(200,baseFolder)
+	users:=api.service.GetUsers()
+	usersDTO:=UserModelsToUserDTOs(users)
+	c.JSON(200,usersDTO)
 }
 
 func (api *DemoApi) Demo2(c *gin.Context) {
