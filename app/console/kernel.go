@@ -37,7 +37,7 @@ func RunCommand(container framework.Container) error {
 
 //绑定业务的命令
 func AddAppCommand(rootCmd *cobra.Command){
-	// rootCmd.AddCommand(demo.FooCommand)
-	// rootCmd.AddCronCommand("* * * * * *",demo.FooCommand)
+	rootCmd.AddCommand(demo.FooCommand)
+	rootCmd.AddCronCommand("* * * * * *",demo.FooCommand)
 	rootCmd.AddDistributedCronCommand("foo_func_for_test","*/5 * * * * *",demo.FooCommand,2*time.Second)
 }
