@@ -68,7 +68,7 @@ func (hade *HadeContainer) Bind(provider ServiceProvider) error{
 	hade.providers[key]=provider
 
 
-	defer hade.lock.Unlock()
+	hade.lock.Unlock()
 
 
 	if !provider.IsDefer(){

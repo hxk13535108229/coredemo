@@ -2,7 +2,6 @@ package console
 
 import (
 	"time"
-
 	"github.com/gohade/hade/app/console/command/demo"
 	"github.com/gohade/hade/framework"
 	"github.com/gohade/hade/framework/cobra"
@@ -23,14 +22,12 @@ func RunCommand(container framework.Container) error {
 		//不需要出现cobra默认的completion子命令
 		CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 	}
-
 	//为根Command设置服务容器
 	rootCmd.SetContainer(container)
 	//绑定框架的命令
 	command.AddKernelCommands(rootCmd)
 	//绑定业务的命令
 	AddAppCommand(rootCmd)
-
 	//执行RootCommand
 	return rootCmd.Execute()
 }
