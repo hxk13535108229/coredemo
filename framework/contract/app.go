@@ -29,4 +29,7 @@ type App interface {
 
 	//存放测试所需要的信息
 	TestFolder() string
+
+	//appID
+	AppID() string
 }
