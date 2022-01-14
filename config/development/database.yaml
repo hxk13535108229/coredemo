@@ -1,0 +1,15 @@
+mysql: 
+  hostname: 127.0.0.1
+  username: root
+  password: root
+  timeout: 1
+  readtime: 2.3
+
+default: 
+  driver: mysql
+  hostname: localhost
+  database: hade
+  username: root
+  password: 201300716
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci

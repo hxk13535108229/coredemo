@@ -2,6 +2,7 @@ package demo
 
 import (
 	demoService "github.com/gohade/hade/app/provider/demo"
+	"github.com/gohade/hade/framework/contract"
 	"github.com/gohade/hade/framework/gin"
 )
 
@@ -27,9 +28,14 @@ func NewDemoApi() *DemoApi {
 }
 
 func (api *DemoApi) Demo(c *gin.Context) {
-	users:=api.service.GetUsers()
-	usersDTO:=UserModelsToUserDTOs(users)
-	c.JSON(200,usersDTO)
+	// users:=api.service.GetUsers()
+	// usersDTO:=UserModelsToUserDTOs(users)
+	// c.JSON(200,usersDTO)
+	//获取password
+	configService:=c.MustMake(contract.ConfigKey).(contract.Config)
+	password := configService.GetString("database.mysql.password")
+
+	c.JSON(200,password)
 }
 
 func (api *DemoApi) Demo2(c *gin.Context) {

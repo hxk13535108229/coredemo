@@ -1,0 +1,9 @@
+url: http://127.0.01:8066
+
+swagger_open: true
+
+dev_fresh: 1
+
+path:
+  log_folder: "/home/hxk/hade/log/"
+  runtime_folder: "/home/hxk/hade/runtime/"
