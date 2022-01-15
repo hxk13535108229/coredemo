@@ -1,6 +1,11 @@
 package contract
 
-import "context"
+import (
+	"context"
+	"net/http"
+)
+
+const TraceKey="hade:trace"
 
 const(
 	TraceKeyTraceID ="trace_id"
@@ -17,7 +22,7 @@ type TraceContext struct {
 	TraceID string
 
 	//父节点SpanID
-	parentID string
+	ParentID string
 
 	//当前节点SpanID
 	SpanID string
@@ -36,5 +41,11 @@ type Trace interface {
 
 	NewTrace() *TraceContext
 
-	//TODO
+	StartSpan(trace *TraceContext) *TraceContext
+
+	ToMap(Trace *TraceContext) map[string]string
+
+	ExtractHTTP(req *http.Request) *TraceContext
+
+	InjectHTTP(req *http.Request,trace *TraceContext) *http.Request
 }

@@ -35,6 +35,13 @@ func (api *DemoApi) Demo(c *gin.Context) {
 	configService:=c.MustMake(contract.ConfigKey).(contract.Config)
 	password := configService.GetString("database.mysql.password")
 
+
+	logger:=c.MustMakeLog()
+	logger.Info(c,"demo test",map[string]interface{}{
+		"api":"demo/demo",
+		"user":"hxk",
+	})
+
 	c.JSON(200,password)
 }
 

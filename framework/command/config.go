@@ -37,7 +37,7 @@ var configGetCommand =&cobra.Command{
 		configPath:=args[0]
 		val:=configService.Get(configPath)
 		if val==nil {
-			fmt.Println("配置路径： ",configPath,"不存在")
+			fmt.Println("配置路径: ",configPath,"不存在")
 			return nil
 		}
 		fmt.Printf("%# v\n",pretty.Formatter(val))
