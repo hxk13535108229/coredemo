@@ -2,7 +2,6 @@ package demo
 
 import (
 	demoService "github.com/gohade/hade/app/provider/demo"
-	"github.com/gohade/hade/framework/contract"
 	"github.com/gohade/hade/framework/gin"
 )
 
@@ -14,9 +13,9 @@ func Register(r *gin.Engine) error {
 	api := NewDemoApi()
 	r.Bind(&demoService.DemoProvider{})
 
-	r.GET("/demo/demo",api.Demo)
-	r.GET("/demo/demo2",api.Demo2)
-	r.POST("/demo/demo_post",api.DemoPost)
+	r.GET("/demo/demo", api.Demo)
+	r.GET("/demo/demo2", api.Demo2)
+	r.POST("/demo/demo_post", api.DemoPost)
 	return nil
 }
 
@@ -28,38 +27,24 @@ func NewDemoApi() *DemoApi {
 }
 
 func (api *DemoApi) Demo(c *gin.Context) {
-	// users:=api.service.GetUsers()
-	// usersDTO:=UserModelsToUserDTOs(users)
-	// c.JSON(200,usersDTO)
-	//获取password
-	configService:=c.MustMake(contract.ConfigKey).(contract.Config)
-	password := configService.GetString("database.mysql.password")
-
-
-	logger:=c.MustMakeLog()
-	logger.Info(c,"demo test",map[string]interface{}{
-		"api":"demo/demo",
-		"user":"hxk",
-	})
-
-	c.JSON(200,password)
+	c.JSON(200,"update success!!!!!  remember version!")
 }
 
 func (api *DemoApi) Demo2(c *gin.Context) {
 	demoProvider := c.MustMake(demoService.DemoKey).(demoService.IService)
-	students:= demoProvider.GetAllStudent()
-	usersDTO:=StudentsToUserDTOs(students)
-	c.JSON(200,usersDTO)
+	students := demoProvider.GetAllStudent()
+	usersDTO := StudentsToUserDTOs(students)
+	c.JSON(200, usersDTO)
 }
 
 func (api *DemoApi) DemoPost(c *gin.Context) {
 	type Foo struct {
 		Name string
 	}
-	foo:=&Foo{}
-	err:=c.BindJSON(&foo)
-	if err!=nil{
-		c.AbortWithError(500,err)
+	foo := &Foo{}
+	err := c.BindJSON(&foo)
+	if err != nil {
+		c.AbortWithError(500, err)
 	}
-	c.JSON(200,nil)
+	c.JSON(200, nil)
 }

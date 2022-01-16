@@ -23,4 +23,7 @@ func AddKernelCommands(root *cobra.Command) {
 
 	//go build
 	root.AddCommand(goCommand)
+
+	//dev
+	root.AddCommand(initDevCommand())
 }
