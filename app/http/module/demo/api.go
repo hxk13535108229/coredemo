@@ -2,6 +2,7 @@ package demo
 
 import (
 	demoService "github.com/gohade/hade/app/provider/demo"
+	"github.com/gohade/hade/app/provider/user"
 	"github.com/gohade/hade/framework/gin"
 )
 
@@ -16,6 +17,7 @@ func Register(r *gin.Engine) error {
 	r.GET("/demo/demo", api.Demo)
 	r.GET("/demo/demo2", api.Demo2)
 	r.POST("/demo/demo_post", api.DemoPost)
+	r.GET("/demo/user",api.DemoUser)
 	return nil
 }
 
@@ -27,7 +29,7 @@ func NewDemoApi() *DemoApi {
 }
 
 func (api *DemoApi) Demo(c *gin.Context) {
-	c.JSON(200,"update success!!!!!  remember version!")
+	c.JSON(200,"sleep!")
 }
 
 func (api *DemoApi) Demo2(c *gin.Context) {
@@ -47,4 +49,10 @@ func (api *DemoApi) DemoPost(c *gin.Context) {
 		c.AbortWithError(500, err)
 	}
 	c.JSON(200, nil)
+}
+
+func (api *DemoApi) DemoUser(c *gin.Context) {
+	userProvider:=c.MustMake(user.UserKey).(user.UService)
+	s:=userProvider.Foo()
+	c.JSON(200,s)
 }

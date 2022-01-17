@@ -4,6 +4,7 @@ import (
 	"github.com/gohade/hade/app/console"
 	"github.com/gohade/hade/app/http"
 	"github.com/gohade/hade/app/provider/demo"
+	"github.com/gohade/hade/app/provider/user"
 	"github.com/gohade/hade/framework"
 	"github.com/gohade/hade/framework/provider/app"
 	"github.com/gohade/hade/framework/provider/config"
@@ -32,6 +33,7 @@ func main() {
 	container.Bind(&log.HadeLogServiceProvider{})
 	container.Bind(&id.HadeIDProvider{})
 	container.Bind(&trace.HadeTraceProvider{})
+	container.Bind(&user.UserProvider{})
 
 	//将HTTP引擎初始化，并且作为服务提供者绑定到服务容器中
 	if engine,err:=http.NewHttpEngine();err==nil {
